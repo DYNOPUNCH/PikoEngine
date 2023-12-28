@@ -1,4 +1,7 @@
 ﻿  Main.cpp
-  PikoTexture.cpp
+C:\Users\willk\Documents\GitHub\PikoEngine\Main.cpp(29,19): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
+C:\Users\willk\Documents\GitHub\PikoEngine\Main.cpp(47,33): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
+C:\Users\willk\Documents\GitHub\PikoEngine\Main.cpp(48,33): warning C4244: '+=': conversion from 'double' to 'int', possible loss of data
+  pikoGameObject.cpp
   Generating Code...
   Piko Engine.vcxproj -> C:\Users\willk\Documents\GitHub\PikoEngine\x64\Debug\Piko Engine.exe

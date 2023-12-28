@@ -6,9 +6,15 @@
 #include <SDL_image.h>
 #include "Globals.h"
 #include "PikoTexture.h"
+#include "pikoGameObject.h"
+#include <math.h>
 
 SDL_Window* window;
 SDL_Renderer* renderer;
+
+// Set the desired FPS
+const int roomSpeed = 60;
+const int frameDelay = 1000 / roomSpeed; // ms per frame
 
 void pikoRect(int x, int y, int width, int height)
 {
@@ -18,23 +24,48 @@ void pikoRect(int x, int y, int width, int height)
     SDL_RenderFillRect(renderer, &fillRect);
 }
 
-// Base class for all game objects
-class GameObject {
-public:
-
-    int x = 0;
-    int y = 0;
-
-    // The update method, which should be overridden by derived classes
-    virtual void update(double deltaTime) = 0;
-};
+float degToRed(float degree)
+{
+    return degree * (M_PI / 180);
+}
 
 // A specific game object, e.g., a player or enemy
 class Player : public GameObject {
 public:
+
+    int position = 0;
+
+    virtual void step()
+    {
+        x = 50;
+        y = 50;
+
+
+        if (position > 360)
+            position = 0;
+
+        x += std::cos(position) * 30;
+        y += std::sin(position) * 30;
+
+        position++;
+    }
+
+    virtual void draw(double deltaTime)
+    {
+
+        pikoRect(x, y, 32, 32);
+
+    };
+
     // Implementing the update method for the player
-    void update(double deltaTime) override {
-        pikoRect(x, y, 400, 400);
+    void update(double deltaTime) override 
+    {
+        
+
+
+
+        
+
     }
 };
 
@@ -88,8 +119,14 @@ int main(int argc, char* args[])
     Player* player = new Player();
     gameObjects.push_back(player);
 
+    Uint32 frameStart;
+    int frameTime;
+
     // While application is running
     while (!quit) {
+
+        frameStart = SDL_GetTicks();
+
         // Handle events on queue
         while (SDL_PollEvent(&e) != 0) {
             // User requests quit
@@ -106,6 +143,17 @@ int main(int argc, char* args[])
         for (auto obj : gameObjects) 
         {
             obj->update(0);
+            obj->draw(0);
+            obj->step();
+        }
+
+
+        // Calculate the time taken to process and render the frame
+        frameTime = SDL_GetTicks() - frameStart;
+
+        // If the frame is processed quicker than the frame time, delay the loop
+        if (frameDelay > frameTime) {
+            SDL_Delay(frameDelay - frameTime);
         }
 
         // Update screen

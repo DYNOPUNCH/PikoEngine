@@ -396,3 +396,8 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+.vs/Piko Engine/v17/Browse.VC.opendb
+.vs/Piko Engine/v17/Browse.VC.db-shm
+.vs/Piko Engine/v17/Browse.VC.db
+.vs/Piko Engine/v17/.suo
+.vs/Piko Engine/FileContentIndex/02557390-d457-4887-b502-d20083278699.vsidx

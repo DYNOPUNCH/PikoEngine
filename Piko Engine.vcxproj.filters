@@ -21,6 +21,9 @@
     <ClCompile Include="PikoTexture.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="pikoGameObject.cpp">
+      <Filter>Header Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Resources\Include\SDL2\begin_code.h">
@@ -264,6 +267,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="PikoTexture.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="pikoGameObject.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
