@@ -138,8 +138,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="PikoTexture.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Globals.h" />
+    <ClInclude Include="PikoTexture.h" />
     <ClInclude Include="Resources\Include\SDL2\begin_code.h" />
     <ClInclude Include="Resources\Include\SDL2\close_code.h" />
     <ClInclude Include="Resources\Include\SDL2\SDL.h" />

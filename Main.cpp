@@ -4,7 +4,10 @@
 #include <algorithm>
 #include <SDL.h>
 #include <SDL_image.h>
+#include "Globals.h"
+#include "PikoTexture.h"
 
+SDL_Window* window;
 SDL_Renderer* renderer;
 
 void pikoRect(int x, int y, int width, int height)
@@ -14,64 +17,6 @@ void pikoRect(int x, int y, int width, int height)
     SDL_SetRenderDrawColor(renderer, 0xFF, 0x00, 0x00, 0xFF);
     SDL_RenderFillRect(renderer, &fillRect);
 }
-
-SDL_Texture* pikoLoadTexture(const char* file)
-{
-    // Load image into surface
-    SDL_Surface* surface = IMG_Load(file);
-    SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, surface);
-
-    // Free the surface immediately if you don't need it anymore
-    SDL_FreeSurface(surface);    // Load image into surface
-
-    return texture;
-}
-
-struct pikoTexture
-{
-
-    private:
-
-        SDL_Texture* texture = NULL;
-        SDL_Rect srcRect = {0, 0, 0, 0};
-        SDL_Rect destRect = {0, 0, 0, 0};
-
-    public:
-        
-        enum pikoTextureRect
-        {
-            PIKO_SOURCE_RECT,
-            PIKO_DESTINATION_RECT
-        };
-
-        void pikoSetTextureRect(int x, int y, int width, int height, pikoTextureRect option)
-        {
-            if(option == PIKO_SOURCE_RECT)
-                srcRect = {x, y, width, height};
-            else if(option == PIKO_DESTINATION_RECT)
-                destRect = { x, y, width, height };
-        }
-
-        void pikoRenderTexture()
-        {
-            // Render texture to screen
-            SDL_RenderCopy(renderer, texture, &srcRect, &destRect);
-        }
-
-        pikoTexture(const char *file)
-        {
-            texture = pikoLoadTexture(file);
-            printf("texture created");
-        }
-
-        ~pikoTexture()
-        {
-            SDL_DestroyTexture(texture);
-            printf("texture destroyed");
-        }
-};
-
-
 
 // Base class for all game objects
 class GameObject {
